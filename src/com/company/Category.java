@@ -34,7 +34,7 @@ public class Category {
 
     void printIncompleteTasks(){
         int k = 0;
-        System.out.println("|Is done?\t" + "|Priority\t\t" + "|Name");
+        System.out.println("  |Is done?\t\t" + "|Priority\t\t" + "|Name");
         for (int i = 0; i < this.tasks.size(); i++){
             if (this.tasks.get(i).isDone == false)
                 k++;

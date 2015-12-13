@@ -14,19 +14,26 @@ public class Main {
         categoryList.add(new Category("Meeting"));
         categoryList.add(new Category("Cleaning"));
 
-        categoryList.get(0).addTaskToCategory(new Task("lalala", 6));
-        categoryList.get(0).addTaskToCategory(new Task("Sieci", 3));
-        categoryList.get(0).addTaskToCategory(new Task("JP", 1));
-        categoryList.get(0).addTaskToCategory(new Task("Powiesic pranie, lol", 6));
+        categoryList.get(0).addTaskToCategory(new Task("JP", 6));
+        categoryList.get(0).addTaskToCategory(new Task("TS", 3));
+        categoryList.get(0).addTaskToCategory(new Task("GK", 1));
+        categoryList.get(0).addTaskToCategory(new Task("PEA", 6));
+
+        categoryList.get(1).addTaskToCategory(new Task("Prezenty", 6));
+
+        categoryList.get(2).addTaskToCategory(new Task("Kino - 18", 6));
+
+        categoryList.get(3).addTaskToCategory(new Task("Wszystko", 6));
 
         int choice = 0;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Reader r = new Reader();
 
-        while (choice != 7){
+        while (choice != 8){
+            System.out.println("Co chcesz zrobic? ");
             System.out.print("1. Dodaj zadanie\n2. Usun zadanie\n3. Przegladaj zadania w wybranej kategorii\n" +
-                    "4. Pokaz wszystkie niedokonczone zadania\n5. Oznacz wybrane zadanie jako zrobione\n6. Przegladaj kategorie\n7. Zakoncz\n");
-            System.out.println("Co chcesz zrobic? Wpisz odpowiedni numer: ");
+                    "4. Pokaz wszystkie niedokonczone zadania\n5. Oznacz wybrane zadanie jako zrobione\n6. Dodaj kategorie\n7. Przegladaj kategorie\n8. Zakoncz\n");
+            System.out.println("Wpisz odpowiedni numer: ");
 
             choice = Integer.parseInt(br.readLine());
 
@@ -35,6 +42,7 @@ public class Main {
                     r.readTask(categoryList);
                     break;
                 case 2:
+                    //TODO
                     break;
                 case 3:
                     r.watchCategory(categoryList);
@@ -46,8 +54,17 @@ public class Main {
                     }
                     break;
                 case 5:
+                    //TODO
                     break;
                 case 6:
+                    r.addCategory(categoryList);
+                    break;
+                case 7:
+                    System.out.println("Dostepne sa nastepujace kategorie: ");
+                    for (int i = 0; i < categoryList.size(); i++){
+                        System.out.println(i+1 + ". " + categoryList.get(i).name);
+                    }
+                    System.out.println();
                     break;
             }
         }
