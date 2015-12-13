@@ -42,10 +42,10 @@ public class Main {
                     r.readTask(categoryList);
                     break;
                 case 2:
-                    //TODO
+                    r.deleteChosenTask(categoryList);
                     break;
                 case 3:
-                    r.watchCategory(categoryList);
+                    r.watchSorted(categoryList, r.watchCategory(categoryList));
                     break;
                 case 4:
                     for (int i = 0; i < categoryList.size(); i++){
@@ -54,7 +54,7 @@ public class Main {
                     }
                     break;
                 case 5:
-                    //TODO
+                   r.asDone(categoryList);
                     break;
                 case 6:
                     r.addCategory(categoryList);

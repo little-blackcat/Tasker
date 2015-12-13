@@ -28,8 +28,8 @@ public class Category {
         this.tasks.add(newTask);
     }
 
-    void removeTaskFromCategory(Task newTask) {
-        this.tasks.remove(newTask);
+    void removeTaskFromCategory(int taskID) {
+        this.tasks.remove(taskID);
     }
 
     void printIncompleteTasks(){
