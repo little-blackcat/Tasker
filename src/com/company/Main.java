@@ -38,7 +38,7 @@ public class Main {
             try{
                 choice = Integer.parseInt(br.readLine());
             }catch (java.lang.NumberFormatException e){
-                System.out.println("Numer taska powinien byc cyfra widoczna przed taskiem!\nSprobuj jeszcze raz: ");
+                System.out.println("Numer taska powinien byc liczba widoczna przed taskiem!\nSprobuj jeszcze raz: ");
             }
 
             switch(choice){

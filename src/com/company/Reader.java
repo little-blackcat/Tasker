@@ -59,7 +59,18 @@ public class Reader {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int catID = watchCategory(categories);
         System.out.println("Ktory task chcesz usunac?");
-        int taskID = (Integer.parseInt(br.readLine()))-1;
+        int taskID = 0;
+
+        while(true) {
+            try {
+                taskID = (Integer.parseInt(br.readLine()))-1;
+                break;
+            } catch (java.lang.NumberFormatException e) {
+                System.out.println("Numer taska powinien byc liczba widoczna przed taskiem!\nSprobuj jeszcze raz: ");
+                continue;
+            }
+        }
+
         categories.get(catID).removeTaskFromCategory(taskID);
         System.out.println("Task zostal usuniety");
     }
@@ -72,8 +83,19 @@ public class Reader {
             System.out.println(i+1 + ". " + categories.get(i).name);
         }
 
+        int catNm = 0;
         System.out.println("Podaj odpowiedni numer: ");
-        int catNm = (Integer.parseInt(br.readLine()))-1;
+
+        while(true) {
+            try {
+                catNm = (Integer.parseInt(br.readLine()))-1;
+                break;
+            } catch (java.lang.NumberFormatException e) {
+                System.out.println("Numer kategorii powinien byc liczba widoczna przed kategoria!\nSprobuj jeszcze raz: ");
+                continue;
+            }
+        }
+
         categories.get(catNm).printTasks();
         return catNm;
     }
@@ -93,13 +115,26 @@ public class Reader {
         System.out.println("Podaj nazwe kategorii, ktora chcesz dodac: ");
         String nm = br.readLine();
         categories.add(new Category(nm));
+        System.out.println("Kategoria zostala dodana");
     }
 
     void asDone(ArrayList<Category> categories) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int catID = watchCategory(categories);
         System.out.println("Ktory task chcesz oznaczyc jako zrobiony?");
-        int taskID = (Integer.parseInt(br.readLine()))-1;
+        int taskID = 0;
+
+        while(true) {
+            try {
+                taskID = (Integer.parseInt(br.readLine()))-1;
+                break;
+            } catch (java.lang.NumberFormatException e) {
+                System.out.println("Numer taska powinien byc liczba widoczna przed taskiem!\nSprobuj jeszcze raz: ");
+                continue;
+            }
+        }
+
+
         categories.get(catID).tasks.get(taskID).markedAsDone();
         System.out.println("Task o nazwie: " + categories.get(catID).tasks.get(taskID).name + " zostal oznaczony jako zrobiony");
     }
