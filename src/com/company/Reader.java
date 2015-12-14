@@ -13,8 +13,19 @@ public class Reader {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Podaj nazwe taska: ");
         String nm = br.readLine();
-        System.out.println("Podaj priorytet taska (1-5): ");
-        int prty = Integer.parseInt(br.readLine());
+        int prty = 0;
+        System.out.println("Podaj priorytet taska (priorytet moze byc dowolna liczba): ");
+
+        while(true) {
+            try {
+                prty = Integer.parseInt(br.readLine());
+                break;
+            } catch (java.lang.NumberFormatException e) {
+                System.out.println("Priorytet powinien byc liczba!\nSprobuj jeszcze raz: ");
+                continue;
+            }
+        }
+
         System.out.println("Do ktorej kategorii chcesz dodac taska?");
 
         for (int i = 0; i < categories.size(); i++) {

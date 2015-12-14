@@ -35,7 +35,11 @@ public class Main {
                     "4. Pokaz wszystkie niedokonczone zadania\n5. Oznacz wybrane zadanie jako zrobione\n6. Dodaj kategorie\n7. Przegladaj kategorie\n8. Zakoncz\n");
             System.out.println("Wpisz odpowiedni numer: ");
 
-            choice = Integer.parseInt(br.readLine());
+            try{
+                choice = Integer.parseInt(br.readLine());
+            }catch (java.lang.NumberFormatException e){
+                System.out.println("Numer taska powinien byc cyfra widoczna przed taskiem!\nSprobuj jeszcze raz: ");
+            }
 
             switch(choice){
                 case 1:
