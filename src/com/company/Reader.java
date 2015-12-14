@@ -16,7 +16,7 @@ public class Reader {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Podaj nazwe taska: ");
         String nm = br.readLine();
-        int prty = 0;
+        int prty;
         System.out.println("Podaj priorytet taska (priorytet moze byc dowolna liczba): ");
 
         while(true) {
@@ -68,7 +68,7 @@ public class Reader {
         int catID = watchCategory(categories);
 
         System.out.println("Ktory task chcesz usunac?");
-        int taskID = 0;
+        int taskID;
 
         while(true) {
             try {
@@ -94,7 +94,7 @@ public class Reader {
         printCategories(categories);
 
         System.out.println("W ktorej kategorii chcesz przegladac taski?");
-        int catNm = 0;
+        int catNm;
         System.out.println("Podaj odpowiedni numer: ");
 
         while(true)
@@ -140,7 +140,7 @@ public class Reader {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int catID = watchCategory(categories);
         System.out.println("Ktory task chcesz oznaczyc jako zrobiony?");
-        int taskID = 0;
+        int taskID;
 
         while(true) {
             try {

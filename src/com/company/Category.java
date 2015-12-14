@@ -12,7 +12,7 @@ public class Category {
 
     public Category(String nm){
         this.name = nm;
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     void printTasks(){
@@ -34,7 +34,7 @@ public class Category {
         int k = 0;
         System.out.println("  |Is done?\t\t" + "|Priority\t\t" + "|Name");
         for (int i = 0; i < this.tasks.size(); i++){
-            if (this.tasks.get(i).isDone == false)
+            if (!this.tasks.get(i).isDone)
                 k++;
                 this.tasks.get(i).printTask(k);
         }

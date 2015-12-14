@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException{
 
-        ArrayList<Category> categoryList = new ArrayList(); //lista kategorii
+        ArrayList<Category> categoryList = new ArrayList<>(); //lista kategorii
 
         //wypelnienie listy przykladowymi kategoriami
         categoryList.add(new Category("Learning"));
