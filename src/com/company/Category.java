@@ -15,6 +15,7 @@ public class Category {
         this.tasks = new ArrayList<>();
     }
 
+    // wypisanie taskow z danej kategorii
     void printTasks(){
         System.out.println("  |Is done?\t\t" + "|Priority\t\t" + "|Name");
         for (int i = 0; i < this.tasks.size(); i++){
@@ -22,14 +23,17 @@ public class Category {
         }
     }
 
+    // dodanie taska do kategorii
     void addTaskToCategory(Task newTask){
         this.tasks.add(newTask);
     }
 
+    // usuniecie taska z kategorii
     void removeTaskFromCategory(int taskID) {
         this.tasks.remove(taskID);
     }
 
+    // wypisanie z kategorii niedokonczonych taskow
     void printIncompleteTasks(){
         int k = 0;
         System.out.println("  |Is done?\t\t" + "|Priority\t\t" + "|Name");

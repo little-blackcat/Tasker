@@ -34,6 +34,7 @@ public class Reader {
         System.out.println("Do ktorej kategorii chcesz dodac taska?\nWpisz nazwe wybranej kategorii: ");
 
         String catNm = br.readLine();
+
         int cnt = 0;
 
         // sprawdzenie, czy istnieje podana przez uzytkownika kategoria
@@ -157,6 +158,16 @@ public class Reader {
         }
 
         System.out.println("Task o nazwie: " + categories.get(catID).tasks.get(taskID).name + " zostal oznaczony jako zrobiony");
+        System.out.println();
+    }
+
+    //wypisuje niedokonczone taski ze wszystkich kategorii
+    void printAllInclompleted(ArrayList<Category> categories) throws IOException{
+        for (int i = 0; i < categories.size(); i++)
+        {
+            System.out.println("Kategoria " + categories.get(i).name + ": ");
+            categories.get(i).printIncompleteTasks();
+        }
         System.out.println();
     }
 }

@@ -40,7 +40,7 @@ public class Main {
             try{
                 choice = Integer.parseInt(br.readLine());
             }catch (java.lang.NumberFormatException e){
-                System.out.println("Numer taska powinien byc liczba widoczna przed taskiem!\nSprobuj jeszcze raz: ");
+                System.out.println("Twoj wybor powinien byc liczba!\nSprobuj jeszcze raz: ");
             }
 
             switch(choice){
@@ -54,10 +54,7 @@ public class Main {
                     r.watchCategory(categoryList);
                     break;
                 case 4:
-                    for (int i = 0; i < categoryList.size(); i++){
-                        System.out.println("Kategoria " + categoryList.get(i).name + ": ");
-                        categoryList.get(i).printIncompleteTasks();
-                    }
+                    r.printAllInclompleted(categoryList);
                     break;
                 case 5:
                    r.asDone(categoryList);
