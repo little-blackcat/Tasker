@@ -9,6 +9,9 @@ import java.util.ArrayList;
  * Created by Paula on 12.12.2015.
  */
 public class Reader {
+
+    // metoda odpowiadajaca za pobranie od uzytkownika nazwy oraz priorytetu
+    // nowego taska i utworzenie go
     void readTask(ArrayList<Category> categories) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Podaj nazwe taska: ");
@@ -26,24 +29,24 @@ public class Reader {
             }
         }
 
-        System.out.println("Do ktorej kategorii chcesz dodac taska?");
+        printCategories(categories);
 
-        for (int i = 0; i < categories.size(); i++) {
-            System.out.println(i + 1 + ". " + categories.get(i).name);
-        }
+        System.out.println("Do ktorej kategorii chcesz dodac taska?\nWpisz nazwe wybranej kategorii: ");
 
-        System.out.println("Wpisz nazwe wybranej kategorii: ");
         String catNm = br.readLine();
         int cnt = 0;
 
+        // sprawdzenie, czy istnieje podana przez uzytkownika kategoria
         for (Category category : categories){
             if (category.name.equals(catNm)){
                 category.addTaskToCategory(new Task(nm, prty));
                 System.out.println("Task zostal dodany do kategorii o nazwie: " + catNm);
                 cnt += 1;
+                System.out.println();
             }
         }
 
+        // jezeli nie - stworzenie podanej kategorii i zapisanie do niej taska
         if (cnt == 0){
             System.out.println("Wpisanej kategorii nie ma na liscie,\nczy chcesz dodac taka kategorie i do niej dodac task? y/n");
             char choice = br.readLine().charAt(0);
@@ -51,73 +54,88 @@ public class Reader {
                 categories.add(new Category(catNm));
                 categories.get(categories.size()-1).addTaskToCategory(new Task(nm, prty));
                 System.out.println("Task zostal dodany do nowej kategorii o nazwie: " + catNm);
+                System.out.println();
             }
         }
     }
 
+
+    // metoda odpowiadajaca za pobranie od uzytkownika indeksu taska, ktory chce usunac
+    // i usuniecie go
     void deleteChosenTask(ArrayList<Category> categories) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         int catID = watchCategory(categories);
+
         System.out.println("Ktory task chcesz usunac?");
         int taskID = 0;
 
         while(true) {
             try {
                 taskID = (Integer.parseInt(br.readLine()))-1;
+                categories.get(catID).removeTaskFromCategory(taskID);
                 break;
             } catch (java.lang.NumberFormatException e) {
                 System.out.println("Numer taska powinien byc liczba widoczna przed taskiem!\nSprobuj jeszcze raz: ");
                 continue;
-            }
-        }
-
-        categories.get(catID).removeTaskFromCategory(taskID);
-        System.out.println("Task zostal usuniety");
-    }
-
-    int watchCategory(ArrayList<Category> categories) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("W ktorej kategorii chcesz przegladac taski?");
-
-        for (int i = 0; i < categories.size(); i++){
-            System.out.println(i+1 + ". " + categories.get(i).name);
-        }
-
-        int catNm = 0;
-        System.out.println("Podaj odpowiedni numer: ");
-
-        while(true) {
-            try {
-                catNm = (Integer.parseInt(br.readLine()))-1;
-                break;
-            } catch (java.lang.NumberFormatException e) {
-                System.out.println("Numer kategorii powinien byc liczba widoczna przed kategoria!\nSprobuj jeszcze raz: ");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Nie ma taska o takim numerze!\nSprobuj jeszcze raz: ");
                 continue;
             }
         }
 
-        categories.get(catNm).printTasks();
+        System.out.println("Task zostal usuniety");
+        System.out.println();
+    }
+
+    //metoda odpowiedzialna za przegladanie taskow w wybranej kategorii
+    int watchCategory(ArrayList<Category> categories) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        printCategories(categories);
+
+        System.out.println("W ktorej kategorii chcesz przegladac taski?");
+        int catNm = 0;
+        System.out.println("Podaj odpowiedni numer: ");
+
+        while(true)
+        {
+            try {
+                catNm = (Integer.parseInt(br.readLine())) - 1;
+                categories.get(catNm).printTasks();
+                break;
+            } catch (java.lang.NumberFormatException e) {
+                System.out.println("Numer kategorii powinien byc liczba widoczna przed kategoria!\nSprobuj jeszcze raz: ");
+                continue;
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Nie ma kategorii o takim numerze!\nSprobuj jeszcze raz: ");
+                continue;
+            }
+        }
+        System.out.println();
+
         return catNm;
     }
 
-    void watchSorted(ArrayList<Category> categories, int catID) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Czy chcesz przesortowac zadania po priorytetach? y/n");
-        char choice = br.readLine().charAt(0);
-        if (choice == 'y'){
-            //categories.get(catID).tasks.sort();
+    //metoda odpowiedzialna za wypisanie dostepnych kategorii
+    void printCategories(ArrayList<Category> categories){
+        System.out.println("Dostepne sa nastepujace kategorie: ");
+        for (int i = 0; i < categories.size(); i++){
+            System.out.println(i+1 + ". " + categories.get(i).name);
         }
-
+        System.out.println();
     }
 
+    //metoda odpowiedzialna za dodawanie kategorii
     void addCategory(ArrayList<Category> categories) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Podaj nazwe kategorii, ktora chcesz dodac: ");
         String nm = br.readLine();
         categories.add(new Category(nm));
-        System.out.println("Kategoria zostala dodana");
+        System.out.println("Kategoria " + nm + " zostala dodana");
+        System.out.println();
     }
 
+    //metoda odpowiedzialna za oznaczanie wybranego taska jako zrobiony
     void asDone(ArrayList<Category> categories) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int catID = watchCategory(categories);
@@ -126,17 +144,20 @@ public class Reader {
 
         while(true) {
             try {
-                taskID = (Integer.parseInt(br.readLine()))-1;
+                taskID = (Integer.parseInt(br.readLine())) - 1;
+                categories.get(catID).tasks.get(taskID).markedAsDone();
                 break;
-            } catch (java.lang.NumberFormatException e) {
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Nie ma taska o takim numerze!\nSprobuj jeszcze raz: ");
+                continue;
+            } catch (NumberFormatException e) {
                 System.out.println("Numer taska powinien byc liczba widoczna przed taskiem!\nSprobuj jeszcze raz: ");
                 continue;
             }
         }
 
-
-        categories.get(catID).tasks.get(taskID).markedAsDone();
         System.out.println("Task o nazwie: " + categories.get(catID).tasks.get(taskID).name + " zostal oznaczony jako zrobiony");
+        System.out.println();
     }
 }
 

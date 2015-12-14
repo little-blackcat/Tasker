@@ -1,8 +1,6 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Created by Paula on 08.12.2015.
